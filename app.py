@@ -15,10 +15,8 @@ def submit():
     if not selected_date:
         return jsonify({"success": False, "message": "No date provided"}), 400
 
-    # Save to a JSON file
     json_file_path = "submitted_data.json"
     try:
-        # Append to JSON file
         with open(json_file_path, 'r') as json_file:
             existing_data = json.load(json_file)
     except FileNotFoundError:
