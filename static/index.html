@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Submission</title>
+</head>
+<body>
+    <h1>Select a Date</h1>
+    <img src="{{ url_for('static', filename='apnea/static/images/cpap_cushion.jpg') }}" alt="Example Image" style="width: 300px;">
+    <form id="date-form">
+        <label for="date">Choose a date:</label>
+        <input type="date" id="date" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message"></p>
+
+    <script>
+        // Handle form submission
+        document.getElementById('date-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form reload
+
+            const selectedDate = document.getElementById('date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message').textContent = "Please select a date.";
+                return;
+            }
+
+            // Send the selected date to the server
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ selected_date: selectedDate })
+            });
+
+            const result = await response.json();
+
+            // Update the DOM with the response message
+            const messageElement = document.getElementById('response-message');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>
