@@ -1,11 +1,12 @@
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
+    # return app.send_static_file('index.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():

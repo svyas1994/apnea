@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Select a Date</h1>
-    <img src="{{ url_for('static', filename='images/cpap_cushion.jpg') }}" alt="Example Image" style="width: 300px;">
+    <p><img src="{{ url_for('static', filename='images/cpap_cushion.jpg') }}" alt="cpap_cushion" class="image" style="width: 300px;"></p>
     <form id="date-form">
         <label for="date">Choose a date:</label>
         <input type="date" id="date" name="selected_date" required>
@@ -37,6 +37,8 @@
             });
 
             const result = await response.json();
+            console.log("check below for date submissino)")
+            console.log(result)
 
             // Update the DOM with the response message
             const messageElement = document.getElementById('response-message');
