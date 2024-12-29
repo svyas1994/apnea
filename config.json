@@ -1,0 +1,10 @@
+{
+    "database": {
+        "host": "localhost",  
+        "user": "root",  
+        "password": "Smile5923!",  
+        "database": "apnea_db", 
+        "port": 3306,
+        "tablename":"cpap_parts"
+    }
+}
