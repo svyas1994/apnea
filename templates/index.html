@@ -17,9 +17,8 @@
     <p id="response-message"></p>
 
     <script>
-        // Handle form submission
         document.getElementById('date-form').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Prevent form reload
+            event.preventDefault(); 
 
             const selectedDate = document.getElementById('date').value;
             if (!selectedDate) {
@@ -27,20 +26,16 @@
                 return;
             }
 
-            // Send the selected date to the server
             const response = await fetch('/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ selected_date: selectedDate })
+                body: JSON.stringify({ selected_date: selectedDate, item_name: 'cpap_cushion' })
             });
 
             const result = await response.json();
-            console.log("check below for date submissino)")
-            console.log(result)
 
-            // Update the DOM with the response message
             const messageElement = document.getElementById('response-message');
             if (result.success) {
                 messageElement.textContent = result.message;
