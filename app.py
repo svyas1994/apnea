@@ -1,6 +1,6 @@
 import json, pymysql
 from flask import Flask, request, jsonify, render_template
-
+from pymysql.cursors import DictCursor
 
 app = Flask(__name__)
 config_path ='config.json'
@@ -62,7 +62,6 @@ def insert_data_to_db(config, data):
     
 
 def connect_to_mysql(config):
-    
     try:
         connection = pymysql.connect(
             host=db_config.get("host"),
@@ -76,10 +75,30 @@ def connect_to_mysql(config):
         return connection
     except pymysql.MySQLError as e:
         print(f"Error connecting to MySQL: {e}")
-    # finally:
-    #     if 'connection' in locals() and connection.open:
-    #         connection.close()
-    #         print("MySQL connection closed.")
+
+@app.route('/get_timestamp', methods=['GET'])
+def get_timestamp():
+    
+    try:
+        connection = connect_to_mysql(config)
+        cursor = connection.cursor(DictCursor)
+        
+        query = "SELECT MAX(TIMESTAMP) as `timestamp` FROM cpap_parts WHERE ITEM_NAME = 'cpap_cushion';"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        
+        if result:
+            return jsonify(success=True, timestamp=result['timestamp'])
+        else:
+            return jsonify(success=False, message="No records found")
+        
+    except Exception as e:
+        return jsonify(success=False, message=f"Error: {str(e)}")
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
 if __name__ == '__main__':
     connect_to_mysql(config)

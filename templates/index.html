@@ -15,10 +15,32 @@
         <button type="submit">Submit</button>
     </form>
     <p id="response-message"></p>
+    <p id="timestamp-display">Latest Timestamp: <span id="timestamp-value">Loading...</span></p>
 
     <script>
+        // Fetch and display the latest timestamp on page load
+        async function fetchTimestamp() {
+            const timestampDisplay = document.getElementById('timestamp-value');
+            try {
+                const response = await fetch('/get_timestamp');
+                const result = await response.json();
+
+                if (result.success) {
+                    timestampDisplay.textContent = result.timestamp;
+                } else {
+                    timestampDisplay.textContent = result.message || "Error fetching timestamp.";
+                }
+            } catch (error) {
+                timestampDisplay.textContent = "Error: " + error.message;
+            }
+        }
+
+        // Call fetchTimestamp on page load
+        document.addEventListener('DOMContentLoaded', fetchTimestamp);
+
+        // Form submission script remains unchanged
         document.getElementById('date-form').addEventListener('submit', async function(event) {
-            event.preventDefault(); 
+            event.preventDefault();
 
             const selectedDate = document.getElementById('date').value;
             if (!selectedDate) {
@@ -47,4 +69,5 @@
         });
     </script>
 </body>
+
 </html>
