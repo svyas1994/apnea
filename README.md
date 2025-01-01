@@ -8,7 +8,7 @@ Website to keep track of my sleep apnea equipment history.
 - .\venv\Scripts\activate
 
 # TODO
-- Think of what type of storage needed(trying json, seems complicated)
-- Build UI
-- load images in grid
-- flask --app 
+- got insert and display of data to work
+- now need to do all the parts, and parameterize the functions for each part
+- then test everything
+- then make bootstrap mobile UI super sexy
