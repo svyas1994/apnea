@@ -1,10 +1,18 @@
 {
-    "database": {
+    "database_db": {
         "host": "localhost",  
         "user": "root",  
         "password": "Smile5923!",  
         "database": "apnea_db", 
         "port": 3306,
+        "tablename":"cpap_parts"
+    },
+    "database": {
+        "host": "dpg-ctmrcrrtq21c73fbj3c0-a.virginia-postgres.render.com",  
+        "user": "apnea_db_user",  
+        "password": "9VThodRkd9dMWzyGySdjXNTaT5AQqeMU",  
+        "database": "apnea_db", 
+        "port": 5432,
         "tablename":"cpap_parts"
     }
 }
