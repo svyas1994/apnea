@@ -7,6 +7,7 @@ Website to keep track of my sleep apnea equipment history.
 - \l (list databases)
 - \c <database_name> (connect to DB)
 - \dt (list all tables in current DB)
+- https://blog.gitguardian.com/secrets-api-management/?utm_source=product&utm_medium=product&utm_campaign=white_knight_v2
 
 # TODO
 - switch to psql

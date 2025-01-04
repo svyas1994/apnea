@@ -18,11 +18,27 @@ def connect_to_postgres(config):
             )
         print("Connected to the PostgreSQL database.")
 
-        cursor = conn.cursor()
+        return conn
+    except psycopg2.errors as e:
+        print(f"ERROR connecting to the PostgreSQL db:{e}")
+        
+def connect_to_postgres1(config):
+    try:
+        conn = psycopg2.connect(
+                host=db_config.get("host"),
+                port=db_config.get("port"),
+                user=db_config.get("user"),
+                password=db_config.get("password"),
+                database=db_config.get("database")
+            )
+        print("Connected to the PostgreSQL database.")
 
-        cursor.execute("SELECT version();")
-        version = cursor.fetchone()
-        print(f"PostgreSQL version: {version}")
+        cursor = conn.cursor()
+        query = "select * from cpap_parts;"
+        cursor.execute(query)
+        # cursor.execute("SELECT version();")
+        query_output = cursor.fetchone()
+        print(f"{query_output}")
 
         cursor.close()
         conn.close()
