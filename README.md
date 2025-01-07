@@ -10,7 +10,6 @@ Website to keep track of my sleep apnea equipment history.
 - https://blog.gitguardian.com/secrets-api-management/?utm_source=product&utm_medium=product&utm_campaign=white_knight_v2
 
 # TODO
-- switch to psql
-- now need to do all the parts, and parameterize the functions for each part
-- then test everything
-- then make bootstrap mobile UI super sexy
+- I want to create a get_timestamp() fuunction that pulls the latest max(timestamp)
+record of a specific value in ONE column. This function should refresh at either
+page refresh or whenever data is inserted in the database.

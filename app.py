@@ -26,18 +26,6 @@ def submit():
     if not selected_date:
         return jsonify({"success": False, "message": "No date provided"}), 400
 
-    json_file_path = "submitted_data.json"
-    try:
-        with open(json_file_path, 'r') as json_file:
-            existing_data = json.load(json_file)
-    except FileNotFoundError:
-        existing_data = []
-
-    existing_data.append({"selected_date": selected_date, "item_name":item_name})
-
-    with open(json_file_path, 'w') as json_file:
-        json.dump(existing_data, json_file, indent=4)
-
     return jsonify({"success": True, "message": f"Date {selected_date} saved successfully to json!!"})
 
 def insert_data_to_db(config, data):
@@ -83,9 +71,9 @@ def get_timestamp():
     try:
         connection = connect_to_postgres(config)
         cursor = connection.cursor(cursor_factory=RealDictCursor)
-
-        query = 'select max("timestamp") as "timestamp" from cpap_parts;'
-        cursor.execute(query)
+        item_name = 'cpap_cushion'
+        query = 'select max("timestamp") as "timestamp" from cpap_parts where item_name = %s;'
+        cursor.execute(query, (item_name,))
         result = cursor.fetchone()
         if result and result["timestamp"]:
             return jsonify(success=True, timestamp=result['timestamp'])

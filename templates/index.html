@@ -7,9 +7,19 @@
     <title>Dynamic Form Submission</title>
 </head>
 <body>
-    <h1>Select a Date</h1>
+    <h1>Select a Date for cpap_cushion</h1>
     <p><img src="{{ url_for('static', filename='images/cpap_cushion.jpg') }}" alt="cpap_cushion" class="image" style="width: 300px;"></p>
-    <form id="date-form">
+    <form id="date_form_cpap_cushion">
+        <label for="date">Choose a date:</label>
+        <input type="date" id="date" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message"></p>
+    <p id="timestamp-display">Latest Timestamp: <span id="timestamp-value">Loading...</span></p>
+
+    <h1>Select a Date for tubing</h1>
+    <p><img src="{{ url_for('static', filename='images/tubing.jpg') }}" alt="tubing" class="image" style="width: 300px;"></p>
+    <form id="date_form_tubing">
         <label for="date">Choose a date:</label>
         <input type="date" id="date" name="selected_date" required>
         <button type="submit">Submit</button>
@@ -18,7 +28,6 @@
     <p id="timestamp-display">Latest Timestamp: <span id="timestamp-value">Loading...</span></p>
 
     <script>
-        // Fetch and display the latest timestamp on page load
         async function fetchTimestamp() {
             const timestampDisplay = document.getElementById('timestamp-value');
             try {
@@ -35,11 +44,10 @@
             }
         }
 
-        // Call fetchTimestamp on page load
+
         document.addEventListener('DOMContentLoaded', fetchTimestamp);
 
-        // Form submission script remains unchanged
-        document.getElementById('date-form').addEventListener('submit', async function(event) {
+        document.getElementById('date_form_cpap_cushion').addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const selectedDate = document.getElementById('date').value;
@@ -47,13 +55,46 @@
                 document.getElementById('response-message').textContent = "Please select a date.";
                 return;
             }
+            
+            let item_name = 'cpap_cushion' 
 
             const response = await fetch('/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ selected_date: selectedDate, item_name: 'cpap_cushion' })
+                body: JSON.stringify({ selected_date: selectedDate, item_name: item_name })
+            });
+
+            const result = await response.json();
+
+            const messageElement = document.getElementById('response-message');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+
+        document.getElementById('date_form_tubing').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message').textContent = "Please select a date.";
+                return;
+            }
+            
+            let item_name = 'tubing' 
+
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ selected_date: selectedDate, item_name: item_name })
             });
 
             const result = await response.json();
