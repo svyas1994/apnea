@@ -82,11 +82,6 @@ def get_timestamp():
         
     except Exception as e:
         return jsonify(success=False, message=f"Error: {str(e)}")
-    finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
 
 if __name__ == '__main__':
     connect_to_postgres(config)

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,68 +6,123 @@
     <title>Dynamic Form Submission</title>
 </head>
 <body>
-    <h1>Select a Date for cpap_cushion</h1>
-    <p><img src="{{ url_for('static', filename='images/cpap_cushion.jpg') }}" alt="cpap_cushion" class="image" style="width: 300px;"></p>
-    <form id="date_form_cpap_cushion">
+    <h1>Select a Date for cushion</h1>
+    <p><img src="{{ url_for('static', filename='images/cushion.jpg') }}" alt="cushion" class="image" style="width: 300px;"></p>
+    <form id="date_form_cushion">
         <label for="date">Choose a date:</label>
-        <input type="date" id="date" name="selected_date" required>
+        <input type="date" id="cushion-date" name="selected_date" required>
         <button type="submit">Submit</button>
     </form>
-    <p id="response-message"></p>
-    <p id="timestamp-display">Latest Timestamp: <span id="timestamp-value">Loading...</span></p>
+    <p id="response-message-cushion"></p>
+    <p id="timestamp-display-cushion">Latest Timestamp: <span id="timestamp-value-cushion">Loading...</span></p>
 
     <h1>Select a Date for tubing</h1>
     <p><img src="{{ url_for('static', filename='images/tubing.jpg') }}" alt="tubing" class="image" style="width: 300px;"></p>
     <form id="date_form_tubing">
-        <label for="date">Choose a date:</label>
-        <input type="date" id="date" name="selected_date" required>
+        <label for="tubing-date">Choose a date:</label>
+        <input type="date" id="tubing-date" name="selected_date" required>
         <button type="submit">Submit</button>
     </form>
-    <p id="response-message"></p>
-    <p id="timestamp-display">Latest Timestamp: <span id="timestamp-value">Loading...</span></p>
+    <p id="response-message-tubing"></p>
+    <p id="timestamp-display-tubing">Latest Timestamp: <span id="timestamp-value-tubing">Loading...</span></p>
+
+    <h1>Select a Date for headgear</h1>
+    <p><img src="{{ url_for('static', filename='images/headgear.jpg') }}" alt="headgear" class="image" style="width: 300px;"></p>
+    <form id="date_form_headgear">
+        <label for="headgear-date">Choose a date:</label>
+        <input type="date" id="headgear-date" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message-headgear"></p>
+    <p id="timestamp-display-headgear">Latest Timestamp: <span id="timestamp-value-headgear">Loading...</span></p>
+
+    <h1>Select a Date for elbow</h1>
+    <p><img src="{{ url_for('static', filename='images/elbow.jpg') }}" alt="headgear" class="image" style="width: 300px;"></p>
+    <form id="date_form_elbow">
+        <label for="elbow">Choose a date:</label>
+        <input type="date" id="elbow" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message-elbow"></p>
+    <p id="timestamp-display-elbow">Latest Timestamp: <span id="timestamp-value-elbow">Loading...</span></p>
+
+    <h1>Select a Date for humidifier</h1>
+    <p><img src="{{ url_for('static', filename='images/humidifier.png') }}" alt="headgear" class="image" style="width: 300px;"></p>
+    <form id="date_form_humidifier">
+        <label for="humidifier">Choose a date:</label>
+        <input type="date" id="humidifier" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message-humidifier"></p>
+    <p id="timestamp-display-humidifier">Latest Timestamp: <span id="timestamp-value-humidifier">Loading...</span></p>
+
+    <h1>Select a Date for filter</h1>
+    <p><img src="{{ url_for('static', filename='images/filter.jpg') }}" alt="headgear" class="image" style="width: 300px;"></p>
+    <form id="date_form_filter">
+        <label for="filter">Choose a date:</label>
+        <input type="date" id="filter" name="selected_date" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response-message-filter"></p>
+    <p id="timestamp-display-filter">Latest Timestamp: <span id="timestamp-value-filter">Loading...</span></p>
+
 
     <script>
         async function fetchTimestamp() {
-            const timestampDisplay = document.getElementById('timestamp-value');
             try {
                 const response = await fetch('/get_timestamp');
                 const result = await response.json();
 
                 if (result.success) {
-                    timestampDisplay.textContent = result.timestamp;
+                    document.getElementById('timestamp-value-cushion').textContent = result.timestamp;
+                    document.getElementById('timestamp-value-tubing').textContent = result.timestamp;
+                    document.getElementById('timestamp-value-headgear').textContent = result.timestamp;
+                    document.getElementById('timestamp-value-elbow').textContent = result.timestamp;
+                    document.getElementById('timestamp-value-humidifier').textContent = result.timestamp;
+                    document.getElementById('timestamp-value-filter').textContent = result.timestamp;
                 } else {
-                    timestampDisplay.textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-cushion').textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-tubing').textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-headgear').textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-elbow').textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-humidifier').textContent = result.message || "Error fetching timestamp.";
+                    document.getElementById('timestamp-value-filter').textContent = result.message || "Error fetching timestamp.";
+                    
                 }
             } catch (error) {
-                timestampDisplay.textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-cushion').textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-tubing').textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-headgear').textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-elbow').textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-humidifier').textContent = "Error: " + error.message;
+                document.getElementById('timestamp-value-filter').textContent = "Error: " + error.message;
             }
         }
 
-
         document.addEventListener('DOMContentLoaded', fetchTimestamp);
 
-        document.getElementById('date_form_cpap_cushion').addEventListener('submit', async function(event) {
+        document.getElementById('date_form_cushion').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const selectedDate = document.getElementById('date').value;
+            const selectedDate = document.getElementById('cushion-date').value;
             if (!selectedDate) {
-                document.getElementById('response-message').textContent = "Please select a date.";
+                document.getElementById('response-message-cushion').textContent = "Please select a date.";
                 return;
             }
-            
-            let item_name = 'cpap_cushion' 
+
+            const item_name = 'cushion';
 
             const response = await fetch('/submit', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ selected_date: selectedDate, item_name: item_name })
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
             });
 
             const result = await response.json();
 
-            const messageElement = document.getElementById('response-message');
+            const messageElement = document.getElementById('response-message-cushion');
             if (result.success) {
                 messageElement.textContent = result.message;
                 messageElement.style.color = "green";
@@ -81,25 +135,149 @@
         document.getElementById('date_form_tubing').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const selectedDate = document.getElementById('date').value;
+            const selectedDate = document.getElementById('tubing-date').value;
             if (!selectedDate) {
-                document.getElementById('response-message').textContent = "Please select a date.";
+                document.getElementById('response-message-tubing').textContent = "Please select a date.";
                 return;
             }
-            
-            let item_name = 'tubing' 
+
+            const item_name = 'tubing';
 
             const response = await fetch('/submit', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ selected_date: selectedDate, item_name: item_name })
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
             });
 
             const result = await response.json();
 
-            const messageElement = document.getElementById('response-message');
+            const messageElement = document.getElementById('response-message-tubing');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+
+        document.getElementById('date_form_headgear').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('headgear-date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message-headgear').textContent = "Please select a date.";
+                return;
+            }
+
+            const item_name = 'headgear';
+
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
+            });
+
+            const result = await response.json();
+
+            const messageElement = document.getElementById('response-message-headgear');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+
+        document.getElementById('date_form_elbow').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('elbow-date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message-elbow').textContent = "Please select a date.";
+                return;
+            }
+
+            const item_name = 'elbow';
+
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
+            });
+
+            const result = await response.json();
+
+            const messageElement = document.getElementById('response-message-elbow');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+
+        document.getElementById('date_form_humidifier').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('humidifier-date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message-humidifier').textContent = "Please select a date.";
+                return;
+            }
+
+            const item_name = 'humidifier';
+
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
+            });
+
+            const result = await response.json();
+
+            const messageElement = document.getElementById('response-message-humidifier');
+            if (result.success) {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "green";
+            } else {
+                messageElement.textContent = result.message;
+                messageElement.style.color = "red";
+            }
+        });
+
+        document.getElementById('date_form_filter').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('filter-date').value;
+            if (!selectedDate) {
+                document.getElementById('response-message-filter').textContent = "Please select a date.";
+                return;
+            }
+
+            const item_name = 'filter';
+
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selected_date: selectedDate, item_name }),
+            });
+
+            const result = await response.json();
+
+            const messageElement = document.getElementById('response-message-filter');
             if (result.success) {
                 messageElement.textContent = result.message;
                 messageElement.style.color = "green";
@@ -110,5 +288,4 @@
         });
     </script>
 </body>
-
 </html>
