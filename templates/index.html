@@ -6,6 +6,7 @@
     <title>Dynamic Form Submission</title>
 </head>
 <body>
+
     <h1>Select a Date for cushion</h1>
     <p><img src="{{ url_for('static', filename='images/cushion.jpg') }}" alt="cushion" class="image" style="width: 300px;"></p>
     <form id="date_form_cushion">
@@ -35,12 +36,12 @@
     </form>
     <p id="response-message-headgear"></p>
     <p id="timestamp-display-headgear">Latest Timestamp: <span id="timestamp-value-headgear">Loading...</span></p>
-
+<!-- Above 3 work, below doesn't -->
     <h1>Select a Date for elbow</h1>
-    <p><img src="{{ url_for('static', filename='images/elbow.jpg') }}" alt="headgear" class="image" style="width: 300px;"></p>
+    <p><img src="{{ url_for('static', filename='images/elbow.jpg') }}" alt="elbow" class="image" style="width: 300px;"></p>
     <form id="date_form_elbow">
-        <label for="elbow">Choose a date:</label>
-        <input type="date" id="elbow" name="selected_date" required>
+        <label for="elbow-date">Choose a date:</label>
+        <input type="date" id="elbow-date" name="selected_date" required>
         <button type="submit">Submit</button>
     </form>
     <p id="response-message-elbow"></p>
@@ -49,8 +50,8 @@
     <h1>Select a Date for humidifier</h1>
     <p><img src="{{ url_for('static', filename='images/humidifier.png') }}" alt="headgear" class="image" style="width: 300px;"></p>
     <form id="date_form_humidifier">
-        <label for="humidifier">Choose a date:</label>
-        <input type="date" id="humidifier" name="selected_date" required>
+        <label for="date_form_humidifier">Choose a date:</label>
+        <input type="date" id="humidifier-date" name="selected_date" required>
         <button type="submit">Submit</button>
     </form>
     <p id="response-message-humidifier"></p>
@@ -60,7 +61,7 @@
     <p><img src="{{ url_for('static', filename='images/filter.jpg') }}" alt="headgear" class="image" style="width: 300px;"></p>
     <form id="date_form_filter">
         <label for="filter">Choose a date:</label>
-        <input type="date" id="filter" name="selected_date" required>
+        <input type="date" id="filter-date" name="selected_date" required>
         <button type="submit">Submit</button>
     </form>
     <p id="response-message-filter"></p>
@@ -131,7 +132,7 @@
                 messageElement.style.color = "red";
             }
         });
-
+// above is cushion
         document.getElementById('date_form_tubing').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -162,7 +163,7 @@
                 messageElement.style.color = "red";
             }
         });
-
+// above is tubing
         document.getElementById('date_form_headgear').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -193,7 +194,7 @@
                 messageElement.style.color = "red";
             }
         });
-
+// above is headgear
         document.getElementById('date_form_elbow').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -224,7 +225,7 @@
                 messageElement.style.color = "red";
             }
         });
-
+// above is elbow
         document.getElementById('date_form_humidifier').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -255,7 +256,7 @@
                 messageElement.style.color = "red";
             }
         });
-
+// above is humidifier
         document.getElementById('date_form_filter').addEventListener('submit', async function(event) {
             event.preventDefault();
 
@@ -286,6 +287,7 @@
                 messageElement.style.color = "red";
             }
         });
+// above is filter
     </script>
 </body>
 </html>

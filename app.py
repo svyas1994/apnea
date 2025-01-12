@@ -71,7 +71,7 @@ def get_timestamp():
     try:
         connection = connect_to_postgres(config)
         cursor = connection.cursor(cursor_factory=RealDictCursor)
-        item_name = 'cpap_cushion'
+        item_name = 'cushion'
         query = 'select max("timestamp") as "timestamp" from cpap_parts where item_name = %s;'
         cursor.execute(query, (item_name,))
         result = cursor.fetchone()
